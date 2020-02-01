@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/sausage-salsa.ogg-ebc80c72c2b0a308f5f913d476e89e29.oggstr"
+
+[deps]
+
+source_file="res://sausage-salsa.ogg"
+dest_files=[ "res://.import/sausage-salsa.ogg-ebc80c72c2b0a308f5f913d476e89e29.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

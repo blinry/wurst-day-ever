@@ -13,6 +13,7 @@ var EMPTY = -1
 var undo_stack = []
 
 var lost = false
+var prev_object_count = -1
 
 func _ready():
     $Name/Label.text = name
@@ -63,10 +64,11 @@ func _input(event):
             d.rotation = dir.angle()+PI
             d.emitting = true
             add_child(d)
-            print("dust")
             undo_stack.push_back(old_state)
             if won():
-                print("won")
+                $AnimationPlayer.play("win")
+                set_process_input(false)
+                yield($AnimationPlayer, "animation_finished")
                 game.next_level()
 
 func won():
@@ -123,6 +125,8 @@ func try_move(pos, dir):
     for id in range(16):
         all += objects.get_used_cells_by_id(id)
     
+    var object_count = 0
+    
     while len(all) > 0:
         var object = []
         find_object(all[0], all, object)
@@ -136,6 +140,13 @@ func try_move(pos, dir):
             oops("You pushed a piece into the water!")
             $Drop.position = objects.map_to_world(object[0])
             $Drop.play()
+        object_count += 1
+    
+    if object_count < prev_object_count and prev_object_count > 0:
+        $Snap.position = objects.map_to_world(pos)
+        $Snap.play()
+    
+    prev_object_count = object_count
     
     return true
     

@@ -20,7 +20,7 @@ run/main_scene="res://level_select.tscn"
 
 [autoload]
 
-game="*res://game.gd"
+game="*res://game.tscn"
 
 [display]
 

@@ -6,7 +6,6 @@ var level
 
 func _ready():
     load_state()
-    print(levels())
     level = 0
 
 func _input(event):
@@ -20,7 +19,6 @@ func _input(event):
 func next_level():
     level += 1
     get_tree().change_scene(levels()[level % len(levels())])
-    print("changed to ", level)
 
 func load_level(n):
     level = n-1

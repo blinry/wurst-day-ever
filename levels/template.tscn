@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://tiles.png" type="Texture" id=1]
 [ext_resource path="res://levels/template.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://step.wav" type="AudioStream" id=6]
 [ext_resource path="res://splash.wav" type="AudioStream" id=7]
 [ext_resource path="res://land.png" type="Texture" id=8]
+[ext_resource path="res://snap.wav" type="AudioStream" id=9]
 
 [sub_resource type="TileSet" id=1]
 0/name = "tiles.png 0"
@@ -227,6 +228,9 @@
 [sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 3 )
 
+[sub_resource type="Animation" id=5]
+resource_name = "win"
+
 [node name="untitled level" type="Node2D"]
 script = ExtResource( 2 )
 
@@ -314,3 +318,9 @@ volume_db = -12.889
 
 [node name="Drop" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 7 )
+
+[node name="Snap" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/win = SubResource( 5 )
