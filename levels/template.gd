@@ -12,6 +12,8 @@ var EMPTY = -1
 
 var undo_stack = []
 
+var lost = false
+
 func _ready():
     pass
 
@@ -21,6 +23,7 @@ func _input(event):
             objects.queue_free()
             objects = undo_stack.pop_back()
             add_child(objects)
+            unoops()
         return
     
     if event.is_action_pressed("reset"):
@@ -28,6 +31,10 @@ func _input(event):
             objects.queue_free()
             objects = undo_stack[0].duplicate()
             add_child(objects)
+            unoops()
+        return
+        
+    if lost:
         return
     
     var dir = Vector2(0, 0)
@@ -110,8 +117,17 @@ func try_move(pos, dir):
         if not on_land:
             for p in object:
                 objects.set_cellv(p, EMPTY)
+            oops("You lost a piece!")
     
     return true
+    
+func oops(message):
+    $Oops.message(message)
+    lost = true
+    
+func unoops():
+    $Oops.hide()
+    lost = false
     
 func find_object(p, all, object):
     all.erase(p)
