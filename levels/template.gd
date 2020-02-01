@@ -18,6 +18,9 @@ func _ready():
     $Name/Label.text = name
 
 func _input(event):
+    if event.is_action_pressed("quit"):
+        get_tree().change_scene("res://level_select.tscn")
+        return
     if event.is_action_pressed("undo"):
         if len(undo_stack) > 0:
             objects.queue_free()

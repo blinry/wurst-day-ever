@@ -10,8 +10,8 @@ func _ready():
     level = 0
 
 func _input(event):
-    if event.is_action_pressed("quit"):
-        get_tree().quit()
+    #if event.is_action_pressed("quit"):
+        #get_tree().quit()
     if event.is_action_pressed("cheat"):
         next_level()
     if event.is_action_pressed("fullscreen"):
@@ -21,6 +21,10 @@ func next_level():
     level += 1
     get_tree().change_scene(levels()[level % len(levels())])
     print("changed to ", level)
+
+func load_level(n):
+    level = n-1
+    next_level()
     
 func levels():
     var tscn_regex = RegEx.new()
@@ -31,7 +35,7 @@ func levels():
     level_dir.list_dir_begin(true)
     var level = level_dir.get_next()
     while level != "":
-        if tscn_regex.search(level) and not ["template.tscn"].has(level):
+        if tscn_regex.search(level) and not ["template.tscn", "test.tscn"].has(level):
             levels.push_back("res://levels/"+level)
         level = level_dir.get_next()
     return levels

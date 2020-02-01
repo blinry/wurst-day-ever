@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://large_font.tres" type="DynamicFont" id=1]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+margin_top = 56.0
+margin_right = 240.0
+margin_bottom = 70.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Untitled Sausage Repair Game"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
