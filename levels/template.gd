@@ -10,12 +10,26 @@ var PLAYER = 16
 var WALL = 17
 var EMPTY = -1
 
-var player
+var undo_stack = []
 
 func _ready():
-    player = objects.get_used_cells_by_id(PLAYER)[0]
+    pass
 
 func _input(event):
+    if event.is_action_pressed("undo"):
+        if len(undo_stack) > 0:
+            objects.queue_free()
+            objects = undo_stack.pop_back()
+            add_child(objects)
+        return
+    
+    if event.is_action_pressed("reset"):
+        if len(undo_stack) > 0:
+            objects.queue_free()
+            objects = undo_stack[0].duplicate()
+            add_child(objects)
+        return
+    
     var dir = Vector2(0, 0)
     if event.is_action_pressed("left"):
         dir = Vector2(-1, 0)
@@ -26,15 +40,15 @@ func _input(event):
     if event.is_action_pressed("down"):
         dir = Vector2(0, 1)
     
+    var player = objects.get_used_cells_by_id(PLAYER)[0]
+    
     if dir != Vector2(0, 0) and is_land(player+dir):
+        var old_state = objects.duplicate()
         if try_move(player, dir):
-            player += dir
+            undo_stack.push_back(old_state)
             if won():
                 print("won")
                 game.next_level()
-    #objects.set_cellv(player, EMPTY)
-    #player += dir
-    #objects.set_cellv(player, PLAYER)
 
 func won():
     var pieces = []
@@ -89,7 +103,6 @@ func try_move(pos, dir):
     while len(moved) > 0:
         var object = []
         find_object(moved[0], moved, object)
-        print(object)
         var on_land = false
         for p in object:
             if is_land(p):
