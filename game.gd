@@ -19,7 +19,7 @@ func _input(event):
     
 func next_level():
     level += 1
-    get_tree().change_scene("levels/"+levels()[level % len(levels())])
+    get_tree().change_scene(levels()[level % len(levels())])
     print("changed to ", level)
     
 func levels():
@@ -32,9 +32,20 @@ func levels():
     var level = level_dir.get_next()
     while level != "":
         if tscn_regex.search(level) and not ["template.tscn"].has(level):
-            levels.push_back(level)
+            levels.push_back("res://levels/"+level)
         level = level_dir.get_next()
     return levels
+
+func levels2():
+    return [
+        "res://levels/trap.tscn",
+        "res://levels/rescue.tscn",
+        "res://levels/bridge.tscn",
+        "res://levels/toowide.tscn",
+        "res://levels/twohigh.tscn",
+        "res://levels/doubletwist.tscn",
+        
+    ]
     
 func _initial_state():
     return {}
