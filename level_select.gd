@@ -11,6 +11,7 @@ func _ready():
         var b2 = button.duplicate()
         b2.text = str(n+1) + ": " + level.instance().name
         b2.connect("button_down", game, "load_level", [n])
+        
         b2.show()
         grid.add_child(b2)
         n += 1

@@ -55,6 +55,15 @@ func _input(event):
     if dir != Vector2(0, 0) and is_land(player+dir):
         var old_state = objects.duplicate()
         if try_move(player, dir):
+            $Step.position = objects.map_to_world(player)
+            $Step.pitch_scale = rand_range(0.8, 1.2)
+            $Step.play()
+            var d = preload("res://dust.tscn").instance()
+            d.position = objects.map_to_world(player) + Vector2(16, 16)/2 + objects.position
+            d.rotation = dir.angle()+PI
+            d.emitting = true
+            add_child(d)
+            print("dust")
             undo_stack.push_back(old_state)
             if won():
                 print("won")
@@ -125,6 +134,8 @@ func try_move(pos, dir):
             for p in object:
                 objects.set_cellv(p, EMPTY)
             oops("You pushed a piece into the water!")
+            $Drop.position = objects.map_to_world(object[0])
+            $Drop.play()
     
     return true
     
