@@ -8,6 +8,14 @@ func _ready():
     load_state()
     print(levels())
     level = 0
+
+func _input(event):
+    if event.is_action_pressed("quit"):
+        get_tree().quit()
+    if event.is_action_pressed("cheat"):
+        next_level()
+    if event.is_action_pressed("fullscreen"):
+        OS.window_fullscreen = !OS.window_fullscreen
     
 func next_level():
     level += 1

@@ -15,7 +15,7 @@ var undo_stack = []
 var lost = false
 
 func _ready():
-    pass
+    $Name/Label.text = name
 
 func _input(event):
     if event.is_action_pressed("undo"):
@@ -106,10 +106,14 @@ func try_move(pos, dir):
         objects.set_cellv(p, EMPTY)
         objects.set_cellv(p+dir, t)
         moved.push_back(p+dir)
-        
-    while len(moved) > 0:
+    
+    var all = []
+    for id in range(16):
+        all += objects.get_used_cells_by_id(id)
+    
+    while len(all) > 0:
         var object = []
-        find_object(moved[0], moved, object)
+        find_object(all[0], all, object)
         var on_land = false
         for p in object:
             if is_land(p):
@@ -117,7 +121,7 @@ func try_move(pos, dir):
         if not on_land:
             for p in object:
                 objects.set_cellv(p, EMPTY)
-            oops("You lost a piece!")
+            oops("You pushed a piece into the water!")
     
     return true
     
