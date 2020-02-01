@@ -2,9 +2,31 @@ extends Node
 
 var _file = "user://savegame.json"
 var state = {}
+var level
 
 func _ready():
     load_state()
+    print(levels())
+    level = 0
+    
+func next_level():
+    level += 1
+    get_tree().change_scene("levels/"+levels()[level % len(levels())])
+    print("changed to ", level)
+    
+func levels():
+    var tscn_regex = RegEx.new()
+    tscn_regex.compile("\\.tscn$")
+    var levels = []
+    var level_dir = Directory.new()
+    level_dir.open("levels")
+    level_dir.list_dir_begin(true)
+    var level = level_dir.get_next()
+    while level != "":
+        if tscn_regex.search(level) and not ["template.tscn"].has(level):
+            levels.push_back(level)
+        level = level_dir.get_next()
+    return levels
     
 func _initial_state():
     return {}

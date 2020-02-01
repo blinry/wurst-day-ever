@@ -31,6 +31,7 @@ func _input(event):
             player += dir
             if won():
                 print("won")
+                game.next_level()
     #objects.set_cellv(player, EMPTY)
     #player += dir
     #objects.set_cellv(player, PLAYER)
