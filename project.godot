@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Untitled Game"
-run/main_scene="res://level_select.tscn"
+run/main_scene="res://levels/title.tscn"
 
 [autoload]
 

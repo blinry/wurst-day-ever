@@ -42,6 +42,7 @@ func levels2():
 
 func levels():
     return [
+        "res://levels/title.tscn",
         "res://levels/first.tscn",
         "res://levels/noedges.tscn",
         "res://levels/trap.tscn",

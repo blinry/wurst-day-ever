@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://small_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://large_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://levels/template.tscn" type="PackedScene" id=3]
+[ext_resource path="res://tiles.png" type="Texture" id=4]
+
+[sub_resource type="TileSet" id=1]
+0/name = "tiles.png 0"
+0/texture = ExtResource( 4 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 64, 16, 16 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shapes = [  ]
+0/z_index = 0
+
+[node name="title" instance=ExtResource( 3 )]
+
+[node name="Background" parent="." index="1"]
+tile_data = PoolIntArray( 196611, 0, 0, 196612, 0, 2, 196613, 0, 2, 196614, 0, 1, 196615, 0, 1, 196616, 0, 1, 196617, 0, 2, 196618, 0, 2, 196619, 0, 2, 196620, 0, 65537, 196621, 0, 262147, 262146, 0, 0, 262147, 0, 65542, 262148, 0, 131074, 262149, 0, 65537, 262150, 0, 65538, 262151, 0, 131074, 262152, 0, 65537, 262153, 0, 131073, 262154, 0, 65538, 262155, 0, 65537, 262156, 0, 131075, 327681, 0, 0, 327682, 0, 65542, 327683, 0, 131074, 327684, 0, 131073, 327685, 0, 131073, 327686, 0, 131073, 327687, 0, 65538, 327688, 0, 131073, 327689, 0, 65538, 327690, 0, 131074, 327691, 0, 65538, 327692, 0, 65537, 327693, 0, 262147, 393217, 0, 196608, 393218, 0, 196610, 393219, 0, 6, 393220, 0, 131073, 393221, 0, 131074, 393222, 0, 131074, 393223, 0, 65537, 393224, 0, 131073, 393225, 0, 65537, 393226, 0, 131074, 393227, 0, 5, 393228, 0, 196611, 458755, 0, 196608, 458756, 0, 196609, 458757, 0, 196609, 458758, 0, 196609, 458759, 0, 196609, 458760, 0, 196609, 458761, 0, 196610, 458762, 0, 196610, 458763, 0, 196611 )
+
+[node name="Arrows" type="TileMap" parent="." index="2"]
+position = Vector2( 0, -4 )
+tile_set = SubResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( 327684, -1073741824, 0, 393219, 1610612736, 0, 393221, 0, 0, 458756, -1610612736, 0 )
+
+[node name="Objects" parent="." index="3"]
+tile_data = PoolIntArray( 393220, 16, 0, 393222, 2, 0, 393224, 10, 0, 393226, 8, 0 )
+
+[node name="Name" parent="." index="4"]
+visible = false
+
+[node name="Label" type="Label" parent="." index="10"]
+margin_top = 18.0
+margin_right = 240.0
+margin_bottom = 32.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Untitled Sausage Repair Game"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="." index="11"]
+margin_top = 49.0
+margin_right = 240.0
+margin_bottom = 94.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/line_spacing = -2
+text = "made by blinry
+for Global Game Jam 2020
+in 48 hours"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

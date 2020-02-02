@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://win.wav" type="AudioStream" id=1]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0 ), 0.0, 4.83239, 0, 0, Vector2( 0.0748762, 0.924818 ), 0.511433, 0.511433, 0, 0, Vector2( 1, 0 ), -2.95784, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 2
+emission_box_extents = Vector3( 500, 500, 500 )
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 50.0
+initial_velocity_random = 0.2
+angular_velocity = 338.43
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -21.7
+scale = 3.0
+scale_curve = SubResource( 4 )
+hue_variation = 1.0
+hue_variation_random = 1.0
+
+[node name="Particles2D" type="Particles2D"]
+amount = 800
+lifetime = 2.0
+explosiveness = 0.92
+process_material = SubResource( 3 )
+
+[node name="Win" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
+autoplay = true
