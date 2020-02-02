@@ -1,4 +1,4 @@
-name = "untitled-game"
+name = "wurst-day-ever"
 
 all: linux macos windows web
 
