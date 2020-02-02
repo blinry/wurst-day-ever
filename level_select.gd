@@ -7,6 +7,7 @@ func _ready():
     button.hide()
     var n = 0
     for l in game.levels():
+        print(l)
         var level = load(l)
         var b2 = button.duplicate()
         b2.text = str(n+1) + ": " + level.instance().name

@@ -15,6 +15,8 @@ func _input(event):
         next_level()
     if event.is_action_pressed("fullscreen"):
         OS.window_fullscreen = !OS.window_fullscreen
+    if event.is_action_pressed("mute"):
+        $Music.playing = not $Music.playing
     
 func next_level():
     level += 1
@@ -24,7 +26,7 @@ func load_level(n):
     level = n-1
     next_level()
     
-func levels():
+func levels2():
     var tscn_regex = RegEx.new()
     tscn_regex.compile("\\.tscn$")
     var levels = []
@@ -38,15 +40,22 @@ func levels():
         level = level_dir.get_next()
     return levels
 
-func levels2():
+func levels():
     return [
+        "res://levels/first.tscn",
+        "res://levels/noedges.tscn",
         "res://levels/trap.tscn",
+        "res://levels/shape.tscn",
+        "res://levels/starfish.tscn",
+        "res://levels/mess.tscn",
+        "res://levels/stick.tscn",
         "res://levels/rescue.tscn",
-        "res://levels/bridge.tscn",
+        "res://levels/ambush.tscn",
         "res://levels/toowide.tscn",
-        "res://levels/twohigh.tscn",
+        "res://levels/twist.tscn",
+        "res://levels/hook.tscn",
         "res://levels/doubletwist.tscn",
-        
+        "res://levels/sokoban.tscn",
     ]
     
 func _initial_state():
