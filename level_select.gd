@@ -20,5 +20,5 @@ func _ready():
 
 func _input(event):
     if event.is_action_pressed("quit"):
-        get_tree().quit()
+        pass#get_tree().quit()
         #get_tree().change_scene("res://title.tscn")
