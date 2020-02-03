@@ -62,8 +62,8 @@ func _input(event):
             var d = preload("res://dust.tscn").instance()
             d.position = objects.map_to_world(player) + Vector2(16, 16)/2 + objects.position
             d.rotation = dir.angle()+PI
-            d.emitting = true
             add_child(d)
+            d.emitting = true
             undo_stack.push_back(old_state)
             if won():
                 $AnimationPlayer.play("win")
