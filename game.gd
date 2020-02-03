@@ -3,6 +3,7 @@ extends Node
 var _file = "user://savegame.json"
 var state = {}
 var level
+var _music_position
 
 func _ready():
     load_state()
@@ -16,7 +17,12 @@ func _input(event):
     if event.is_action_pressed("fullscreen"):
         OS.window_fullscreen = !OS.window_fullscreen
     if event.is_action_pressed("mute"):
-        $Music.playing = not $Music.playing
+        if $Music.playing:
+            _music_position = $Music.get_playback_position()
+            $Music.playing = false
+        else:
+            $Music.play()
+            $Music.seek(_music_position)
     
 func next_level():
     level += 1
