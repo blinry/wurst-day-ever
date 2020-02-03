@@ -69,7 +69,7 @@ func _input(event):
                 $AnimationPlayer.play("win")
                 set_process_input(false)
                 var c = preload("res://confetti.tscn").instance()
-                c.position = objects.map_to_world(player+dir) + Vector2(16, 16)/2 + objects.position
+                #c.position = objects.map_to_world(player+dir) + Vector2(16, 16)/2 + objects.position
                 add_child(c)
                 yield($AnimationPlayer, "animation_finished")
                 game.next_level()

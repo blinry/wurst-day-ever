@@ -20,6 +20,7 @@ func _input(event):
     
 func next_level():
     level += 1
+    level %= len(levels())
     get_tree().change_scene(levels()[level % len(levels())])
 
 func load_level(n):
@@ -45,9 +46,9 @@ func levels():
         "res://levels/title.tscn",
         "res://levels/first.tscn",
         "res://levels/noedges.tscn",
-        "res://levels/trap.tscn",
         "res://levels/shape.tscn",
         "res://levels/starfish.tscn",
+        "res://levels/trap.tscn",
         "res://levels/mess.tscn",
         "res://levels/stick.tscn",
         "res://levels/rescue.tscn",
