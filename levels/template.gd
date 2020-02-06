@@ -17,9 +17,12 @@ var prev_object_count = -1
 
 func _ready():
     $Name/Label.text = name
+    game.fade_in()
 
 func _input(event):
     if event.is_action_pressed("quit"):
+        game.fade_out()
+        yield(game, "faded_out")
         get_tree().change_scene("res://level_select.tscn")
         return
     if event.is_action_pressed("undo"):
@@ -69,7 +72,6 @@ func _input(event):
                 $AnimationPlayer.play("win")
                 set_process_input(false)
                 var c = preload("res://confetti.tscn").instance()
-                #c.position = objects.map_to_world(player+dir) + Vector2(16, 16)/2 + objects.position
                 add_child(c)
                 yield($AnimationPlayer, "animation_finished")
                 game.next_level()

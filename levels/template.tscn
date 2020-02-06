@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://tiles.png" type="Texture" id=1]
 [ext_resource path="res://levels/template.gd" type="Script" id=2]
@@ -238,38 +238,9 @@
 [sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 3 )
 
-[sub_resource type="Animation" id=5]
-resource_name = "start"
-length = 0.25
-step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("Fade:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-
 [sub_resource type="Animation" id=6]
 length = 2.0
 step = 0.05
-tracks/0/type = "value"
-tracks/0/path = NodePath("Fade:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 1.85, 2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
 
 [node name="untitled level" type="Node2D"]
 script = ExtResource( 2 )
@@ -363,23 +334,4 @@ stream = ExtResource( 7 )
 stream = ExtResource( 9 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "start"
-anims/start = SubResource( 5 )
 anims/win = SubResource( 6 )
-
-[node name="Fade" type="Node2D" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-z_index = 1
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
-}
-
-[node name="Black" type="ColorRect" parent="Fade"]
-margin_top = 0.322044
-margin_right = 240.0
-margin_bottom = 135.322
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}

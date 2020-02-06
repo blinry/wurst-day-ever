@@ -1,5 +1,8 @@
 extends Node
 
+signal faded_out
+signal faded_in
+
 var _file = "user://savegame.json"
 var state = {}
 var level
@@ -27,6 +30,8 @@ func _input(event):
 func next_level():
     level += 1
     level %= len(levels())
+    fade_out()
+    yield(self, "faded_out")
     get_tree().change_scene(levels()[level % len(levels())])
 
 func load_level(n):
@@ -90,3 +95,13 @@ func load_state() -> bool:
         state[key] = new_state[key]
     savegame.close()
     return true
+
+func fade_out():
+    $AnimationPlayer.play("fadeout")
+    yield($AnimationPlayer, "animation_finished")
+    emit_signal("faded_out")
+
+func fade_in():
+    $AnimationPlayer.play("fadein")
+    yield($AnimationPlayer, "animation_finished")
+    emit_signal("faded_in")

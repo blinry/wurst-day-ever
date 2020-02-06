@@ -4,6 +4,7 @@ onready var button = $Control/MarginContainer/GridContainer/Button
 onready var grid = $Control/MarginContainer/GridContainer
 
 func _ready():
+    game.fade_in()
     button.hide()
     var n = 0
     for l in game.levels():
