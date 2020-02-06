@@ -15,11 +15,18 @@ var undo_stack = []
 var lost = false
 var prev_object_count = -1
 
+var swipe_start
+
 func _ready():
     $Name/Label.text = name
     game.fade_in()
 
 func _input(event):
+    if event.is_action_pressed("click"):
+        swipe_start = get_global_mouse_position()
+    if event.is_action_released("click"):
+        swipe(swipe_start, get_global_mouse_position())
+        
     if event.is_action_pressed("quit"):
         game.fade_out()
         yield(game, "faded_out")
@@ -53,7 +60,9 @@ func _input(event):
         dir = Vector2(0, -1)
     if event.is_action_pressed("down"):
         dir = Vector2(0, 1)
-    
+    move(dir)
+
+func move(dir): 
     var player = objects.get_used_cells_by_id(PLAYER)[0]
     
     if dir != Vector2(0, 0) and is_land(player+dir):
@@ -231,3 +240,19 @@ func connected(p1, p2):
         return id2 & 8 == 8 and id1 & 2 == 2
     
     return false
+
+func swipe(from, to):
+    print(from, to)
+    var d = to-from
+    if d.length() < 8:
+        return
+        
+    var h = abs(d.x)
+    var v = abs(d.y)
+    
+    if h > 2*v:
+        move(Vector2(sign(d.x), 0))
+    elif v > 2*h:
+        move(Vector2(0, sign(d.y)))
+    else:
+        pass # ignore this swipe
