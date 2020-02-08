@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://tiles.png" type="Texture" id=1]
 [ext_resource path="res://levels/template.gd" type="Script" id=2]
@@ -10,7 +10,7 @@
 [ext_resource path="res://land.png" type="Texture" id=8]
 [ext_resource path="res://snap.wav" type="AudioStream" id=9]
 
-[sub_resource type="TileSet" id=1]
+[sub_resource type="TileSet" id=5]
 0/name = "tiles.png 0"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
@@ -22,7 +22,7 @@
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="TileSet" id=2]
+[sub_resource type="TileSet" id=6]
 0/name = "land.png 0"
 0/texture = ExtResource( 8 )
 0/tex_offset = Vector2( 0, 0 )
@@ -43,7 +43,7 @@
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="TileSet" id=3]
+[sub_resource type="TileSet" id=7]
 0/name = "tiles.png 0"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
@@ -235,33 +235,48 @@
 18/shapes = [  ]
 18/z_index = 0
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=8]
 font_data = ExtResource( 3 )
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=9]
 length = 2.0
 step = 0.05
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+void fragment() {
+    vec2 uv = UV*(1.0 - UV.yx);
+    float vig = uv.x*uv.y*15.0;
+    vig = pow(vig, 0.5);
+    float a = 1.0-pow(vig, 0.25);
+
+    COLOR = vec4(vec3(vig), a);
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
 
 [node name="untitled level" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Water" type="TileMap" parent="."]
 position = Vector2( 0, -4 )
-tile_set = SubResource( 1 )
+tile_set = SubResource( 5 )
 cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 65546, 0, 0, 65547, 0, 0, 65548, 0, 0, 65549, 0, 0, 65550, 0, 0, 131072, 0, 0, 131073, 0, 0, 131074, 0, 0, 131075, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 131082, 0, 0, 131083, 0, 0, 131084, 0, 0, 131085, 0, 0, 131086, 0, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196619, 0, 0, 196620, 0, 0, 196621, 0, 0, 196622, 0, 0, 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262156, 0, 0, 262157, 0, 0, 262158, 0, 0, 327680, 0, 0, 327681, 0, 0, 327682, 0, 0, 327683, 0, 0, 327684, 0, 0, 327685, 0, 0, 327686, 0, 0, 327687, 0, 0, 327688, 0, 0, 327689, 0, 0, 327690, 0, 0, 327691, 0, 0, 327692, 0, 0, 327693, 0, 0, 327694, 0, 0, 393216, 0, 0, 393217, 0, 0, 393218, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 0, 0, 393225, 0, 0, 393226, 0, 0, 393227, 0, 0, 393228, 0, 0, 393229, 0, 0, 393230, 0, 0, 458752, 0, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0, 458765, 0, 0, 458766, 0, 0, 524288, 0, 0, 524289, 0, 0, 524290, 0, 0, 524291, 0, 0, 524292, 0, 0, 524293, 0, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 0, 0, 524299, 0, 0, 524300, 0, 0, 524301, 0, 0, 524302, 0, 0 )
 
 [node name="Background" type="TileMap" parent="."]
 position = Vector2( 0, -4 )
-tile_set = SubResource( 2 )
+tile_set = SubResource( 6 )
 cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( 131078, 0, 0, 131079, 0, 1, 131080, 0, 1, 131081, 0, 3, 196612, 0, 0, 196613, 0, 2, 196614, 0, 65542, 196615, 0, 65538, 196616, 0, 131074, 196617, 0, 65539, 262148, 0, 65536, 262149, 0, 131074, 262150, 0, 131073, 262151, 0, 65538, 262152, 0, 131074, 262153, 0, 65539, 327682, 0, 262144, 327683, 0, 262146, 327684, 0, 65537, 327685, 0, 65538, 327686, 0, 131073, 327687, 0, 65537, 327688, 0, 5, 327689, 0, 65537, 327690, 0, 65537, 327691, 0, 3, 393220, 0, 131072, 393221, 0, 131073, 393222, 0, 65537, 393223, 0, 131074, 393224, 0, 65539, 393226, 0, 196608, 393227, 0, 196611, 458756, 0, 196608, 458757, 0, 196609, 458758, 0, 196609, 458759, 0, 196609, 458760, 0, 196611 )
 
 [node name="Objects" type="TileMap" parent="."]
 position = Vector2( 0, -4 )
-tile_set = SubResource( 3 )
+tile_set = SubResource( 7 )
 cell_size = Vector2( 16, 16 )
 format = 1
 
@@ -300,7 +315,7 @@ __meta__ = {
 margin_top = 45.0
 margin_right = 240.0
 margin_bottom = 62.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 8 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Oops!"
 align = 1
@@ -314,7 +329,7 @@ modulate = Color( 0.4, 0.458824, 0.847059, 1 )
 margin_top = 69.0
 margin_right = 240.0
 margin_bottom = 86.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 8 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "Z: undo  R: reset"
 align = 1
@@ -334,4 +349,13 @@ stream = ExtResource( 7 )
 stream = ExtResource( 9 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/win = SubResource( 6 )
+anims/win = SubResource( 9 )
+
+[node name="Vignette" type="ColorRect" parent="."]
+visible = false
+material = SubResource( 4 )
+margin_right = 240.0
+margin_bottom = 135.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
