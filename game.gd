@@ -69,7 +69,6 @@ func levels():
         "res://levels/hook.tscn",
         "res://levels/doubletwist.tscn",
         "res://levels/sokoban.tscn",
-        "res://levels/lx.tscn",
     ]
     
 func _initial_state():
