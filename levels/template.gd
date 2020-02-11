@@ -86,6 +86,8 @@ func move(dir):
                 game.next_level()
 
 func won():
+    if lost:
+        return false # duh
     var pieces = []
     for id in range(16):
         pieces += objects.get_used_cells_by_id(id)
