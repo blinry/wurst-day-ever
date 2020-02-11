@@ -74,7 +74,7 @@ __meta__ = {
 
 [node name="GridContainer" type="GridContainer" parent="Control/MarginContainer"]
 margin_right = 44.0
-margin_bottom = 13.0
+margin_bottom = 11.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 custom_constants/vseparation = 4
@@ -86,7 +86,7 @@ __meta__ = {
 
 [node name="Button" type="Button" parent="Control/MarginContainer/GridContainer"]
 margin_right = 44.0
-margin_bottom = 13.0
+margin_bottom = 11.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme = SubResource( 2 )

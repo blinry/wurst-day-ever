@@ -7,6 +7,7 @@ var _file = "user://savegame.json"
 var state = {}
 var level
 var _music_position
+var level_selector = "levels"
 
 func _ready():
     load_state()
@@ -28,27 +29,28 @@ func _input(event):
             $Music.seek(_music_position)
     
 func next_level():
+    var levelset = call(level_selector)
     level += 1
-    level %= len(levels())
+    level %= len(levelset)
     fade_out()
     yield(self, "faded_out")
-    get_tree().change_scene(levels()[level % len(levels())])
+    get_tree().change_scene(levelset[level % len(levelset)])
 
 func load_level(n):
     level = n-1
     next_level()
-    
-func levels2():
+
+func levels_contrib():
     var tscn_regex = RegEx.new()
     tscn_regex.compile("\\.tscn$")
     var levels = []
     var level_dir = Directory.new()
-    level_dir.open("levels")
+    level_dir.open("levels/contrib")
     level_dir.list_dir_begin(true)
     var level = level_dir.get_next()
     while level != "":
         if tscn_regex.search(level) and not ["template.tscn", "test.tscn"].has(level):
-            levels.push_back("res://levels/"+level)
+            levels.push_back("res://levels/contrib/"+level)
         level = level_dir.get_next()
     return levels
 
