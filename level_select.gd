@@ -1,15 +1,22 @@
 extends Node2D
 
-onready var button = $Control/MarginContainer/GridContainer/Button
-onready var grid = $Control/MarginContainer/GridContainer
+onready var button = $Control/ScrollContainer/GridContainer/Button
+onready var grid = $Control/ScrollContainer/GridContainer
 onready var title = $Control/Label
+onready var next = $Control/NextLevelsetButton
+onready var prev = $Control/PrevLevelsetButton
+onready var author = $Control/LevelAuthorLabel
 
 func _ready():
     game.fade_in()
-    title.text = "Pick a level:" if game.level_selector == "levels" else "Contributed levels:"
+    var current_levelset = game.current_levelset()
+    title.text = current_levelset["headline"]
+    #var clevel = load(game.current_level())
+    #author.text = "Level by: " + clevel.instance().author
     button.hide()
     var n = 0
-    for l in game.call(game.level_selector):
+    for l in current_levelset["levels"]:
+        print("Loading " + l)
         var level = load(l)
         var b2 = button.duplicate()
         b2.text = str(n+1) + ": " + level.instance().name
@@ -18,15 +25,16 @@ func _ready():
         b2.show()
         grid.add_child(b2)
         n += 1
-    add_levelset_button()
+    grid.reconnect()
+    manage_levelset_buttons()
     select_current_level_button()
-    
-func add_levelset_button():
-    var b3 = button.duplicate()
-    b3.text = "contrib" if game.level_selector == "levels" else "back"
-    b3.connect("button_down", self, "show_levelset", ["levels_contrib" if game.level_selector == "levels" else "levels"])
-    b3.show()
-    grid.add_child(b3)
+
+func manage_levelset_buttons():
+    var levelsets = game.levels()
+    prev.visible = !(game.levelset == 0)
+    prev.connect("button_down", self, "show_levelset", [game.levelset-1])
+    next.visible = !(game.levelset == len(levelsets)-1)
+    next.connect("button_down", self, "show_levelset", [game.levelset+1])
     
 func select_current_level_button():
     var active_button = grid.get_child(game.level+1)
@@ -35,8 +43,9 @@ func select_current_level_button():
     else:
         grid.get_child(1).grab_focus()
 
-func show_levelset(level_selector):
-    game.level_selector = level_selector
+func show_levelset(levelsetnum):
+    game.levelset = levelsetnum
+    game.level = 0
     game.fade_out()
     yield(game, "faded_out")
     get_tree().change_scene("res://level_select.tscn")

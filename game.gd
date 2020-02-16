@@ -7,7 +7,7 @@ var _file = "user://savegame.json"
 var state = {}
 var level
 var _music_position
-var level_selector = "levels"
+var levelset = 0
 
 func _ready():
     load_state()
@@ -28,49 +28,69 @@ func _input(event):
             $Music.play()
             $Music.seek(_music_position)
     
+func current_levelset():
+    return levels()[levelset]
+    
+func current_levels():
+    return current_levelset()["levels"]
+    
+func current_level():
+    return current_levelset()["levels"][level]
+    
 func next_level():
-    var levelset = call(level_selector)
+    var levels = current_levels()
     level += 1
-    level %= len(levelset)
+    level %= len(levels)
     fade_out()
     yield(self, "faded_out")
-    get_tree().change_scene(levelset[level % len(levelset)])
+    get_tree().change_scene(levels[level % len(levels)])
 
 func load_level(n):
     level = n-1
     next_level()
 
-func levels_contrib():
+func list_levels(folder):
     var tscn_regex = RegEx.new()
     tscn_regex.compile("\\.tscn$")
     var levels = []
     var level_dir = Directory.new()
-    level_dir.open("levels/contrib")
+    level_dir.open(folder)
     level_dir.list_dir_begin(true)
     var level = level_dir.get_next()
     while level != "":
         if tscn_regex.search(level) and not ["template.tscn", "test.tscn"].has(level):
-            levels.push_back("res://levels/contrib/"+level)
+            levels.push_back("res://"+folder+"/"+level)
         level = level_dir.get_next()
     return levels
 
 func levels():
     return [
-        "res://levels/title.tscn",
-        "res://levels/first.tscn",
-        "res://levels/noedges.tscn",
-        "res://levels/shape.tscn",
-        "res://levels/starfish.tscn",
-        "res://levels/trap.tscn",
-        "res://levels/mess.tscn",
-        "res://levels/stick.tscn",
-        "res://levels/rescue.tscn",
-        "res://levels/ambush.tscn",
-        "res://levels/toowide.tscn",
-        "res://levels/twist.tscn",
-        "res://levels/hook.tscn",
-        "res://levels/doubletwist.tscn",
-        "res://levels/sokoban.tscn",
+        {
+            "headline"  : "Pick a level:",
+            "authors"    : "blinry",
+            "levels"    : [
+                "res://levels/title.tscn",
+                "res://levels/first.tscn",
+                "res://levels/noedges.tscn",
+                "res://levels/shape.tscn",
+                "res://levels/starfish.tscn",
+                "res://levels/trap.tscn",
+                "res://levels/mess.tscn",
+                "res://levels/stick.tscn",
+                "res://levels/rescue.tscn",
+                "res://levels/ambush.tscn",
+                "res://levels/toowide.tscn",
+                "res://levels/twist.tscn",
+                "res://levels/hook.tscn",
+                "res://levels/doubletwist.tscn",
+                "res://levels/sokoban.tscn",
+            ]
+        },
+        {
+            "headline"  : "Contributed levels:",
+            "authors"   : "anathem, overflo, lx242",
+            "levels"    : list_levels("levels/contrib")+list_levels("levels"),
+        },
     ]
     
 func _initial_state():
