@@ -1,6 +1,7 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://level_select.gd" type="Script" id=1]
+[ext_resource path="res://small_font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://tiles.png" type="Texture" id=3]
 [ext_resource path="res://large_font.tres" type="DynamicFont" id=4]
 [ext_resource path="res://m3x6.ttf" type="DynamicFontData" id=5]
@@ -510,12 +511,6 @@ Button/styles/pressed = null
 
 [sub_resource type="StyleBoxEmpty" id=7]
 
-[sub_resource type="DynamicFontData" id=11]
-font_path = "res://m3x6.ttf"
-
-[sub_resource type="DynamicFont" id=12]
-font_data = SubResource( 11 )
-
 [node name="LevelSelect" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -557,6 +552,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="LevelAuthorLabel" type="Label" parent="Control"]
+margin_top = 106.0
+margin_right = 240.0
+margin_bottom = 121.0
+custom_fonts/font = SubResource( 8 )
+custom_colors/font_color = Color( 0.298039, 0.298039, 0.298039, 1 )
+text = "Level by:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="ScrollContainer" type="ScrollContainer" parent="Control"]
 margin_left = 12.0
 margin_top = 24.0
@@ -577,16 +584,16 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 custom_constants/vseparation = 4
 custom_constants/hseparation = 8
-columns = 3
+columns = 2
 script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Button" type="Button" parent="Control/ScrollContainer/GridContainer"]
-margin_right = 72.0
+margin_right = 108.0
 margin_bottom = 13.0
-rect_min_size = Vector2( 36, 13 )
+rect_min_size = Vector2( 66, 13 )
 size_flags_horizontal = 3
 size_flags_vertical = 0
 theme = SubResource( 2 )
@@ -595,7 +602,7 @@ custom_styles/pressed = SubResource( 4 )
 custom_styles/focus = SubResource( 5 )
 custom_styles/disabled = SubResource( 6 )
 custom_styles/normal = SubResource( 7 )
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Some fu!"
 align = 0

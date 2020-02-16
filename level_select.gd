@@ -11,20 +11,19 @@ func _ready():
     game.fade_in()
     var current_levelset = game.current_levelset()
     title.text = current_levelset["headline"]
-    #var clevel = load(game.current_level())
-    #author.text = "Level by: " + clevel.instance().author
     button.hide()
     var n = 0
     for l in current_levelset["levels"]:
         print("Loading " + l)
         var level = load(l)
         var b2 = button.duplicate()
-        b2.text = str(n+1) + ": " + level.instance().name
+        b2.text = (str(n+1) + ": " + level.instance().name).substr(0,18)
         b2.connect("button_down", game, "load_level", [n])
         
         b2.show()
         grid.add_child(b2)
         n += 1
+    grid.set_author_label(author)
     grid.reconnect()
     manage_levelset_buttons()
     select_current_level_button()
@@ -53,5 +52,6 @@ func show_levelset(levelsetnum):
 
 func _input(event):
     if event.is_action_pressed("quit"):
-        pass#get_tree().quit()
+        pass
+        #get_tree().quit()
         #get_tree().change_scene("res://title.tscn")

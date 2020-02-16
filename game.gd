@@ -89,7 +89,7 @@ func levels():
         {
             "headline"  : "Contributed levels:",
             "authors"   : "anathem, overflo, lx242",
-            "levels"    : list_levels("levels/contrib")+list_levels("levels"),
+            "levels"    : list_levels("levels/contrib"),
         },
     ]
     
