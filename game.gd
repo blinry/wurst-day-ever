@@ -76,14 +76,16 @@ func levels():
             "headline"  : "Fan-made levels:",
             "authors"   : "anathem, overflo, lx242",
             "levels"    : [
+                "res://levels/contrib/lx.tscn",
                 "res://levels/contrib/overflo.tscn",
                 "res://levels/contrib/catwalk.tscn",
-                "res://levels/contrib/caldera.tscn",
-                "res://levels/contrib/lx.tscn",
-                "res://levels/contrib/glitch.tscn",
-                "res://levels/contrib/glitchcopter.tscn",
-                "res://levels/contrib/bridges.tscn",
                 "res://levels/contrib/wurst.tscn",
+                "res://levels/contrib/bridges.tscn",
+                "res://levels/contrib/caldera.tscn",
+                "res://levels/contrib/glitch.tscn",
+                "res://levels/contrib/quantumleap.tscn",
+                "res://levels/contrib/dungeon.tscn",
+                "res://levels/contrib/glitchcopter.tscn",
             ]
         },
     ]
