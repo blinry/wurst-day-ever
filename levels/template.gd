@@ -1,5 +1,7 @@
 extends Node2D
 
+export var author = "blinry"
+
 onready var bg = $Background
 onready var objects = $Objects
 
