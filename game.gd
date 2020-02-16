@@ -49,20 +49,6 @@ func load_level(n):
     level = n-1
     next_level()
 
-func list_levels(folder):
-    var tscn_regex = RegEx.new()
-    tscn_regex.compile("\\.tscn$")
-    var levels = []
-    var level_dir = Directory.new()
-    level_dir.open(folder)
-    level_dir.list_dir_begin(true)
-    var level = level_dir.get_next()
-    while level != "":
-        if tscn_regex.search(level) and not ["template.tscn", "test.tscn"].has(level):
-            levels.push_back("res://"+folder+"/"+level)
-        level = level_dir.get_next()
-    return levels
-
 func levels():
     return [
         {
@@ -87,9 +73,18 @@ func levels():
             ]
         },
         {
-            "headline"  : "Contributed levels:",
+            "headline"  : "Fan-made levels:",
             "authors"   : "anathem, overflo, lx242",
-            "levels"    : list_levels("levels/contrib"),
+            "levels"    : [
+                "res://levels/contrib/overflo.tscn",
+                "res://levels/contrib/catwalk.tscn",
+                "res://levels/contrib/caldera.tscn",
+                "res://levels/contrib/lx.tscn",
+                "res://levels/contrib/glitch.tscn",
+                "res://levels/contrib/glitchcopter.tscn",
+                "res://levels/contrib/bridges.tscn",
+                "res://levels/contrib/wurst.tscn",
+            ]
         },
     ]
     
