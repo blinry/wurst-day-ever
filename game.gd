@@ -86,6 +86,7 @@ func levels():
                 "res://levels/contrib/quantumleap.tscn",
                 "res://levels/contrib/dungeon.tscn",
                 "res://levels/contrib/glitchcopter.tscn",
+                "res://levels/contrib/key.tscn",
             ]
         },
     ]
