@@ -13,3 +13,7 @@ Fonts by Daniel Linssen: https://managore.itch.io
 ## License
 
 This game is available under the terms of CC BY-NC-SA 4.0.
+
+## How to contribute levels
+
+See https://chaos.social/@blinry/103606897931795350
